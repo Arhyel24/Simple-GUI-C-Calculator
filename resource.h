@@ -1,0 +1,8 @@
+#define ID_FILE_COPY 21
+#define ID_FILE_EXIT 22
+
+#define ID_ABOUTABOUT 23
+#define ID_ABOUTCHANGELOG 24
+#define ID_ABOUTHELP 25
+
+#define IDR_MENU_MAIN 101
