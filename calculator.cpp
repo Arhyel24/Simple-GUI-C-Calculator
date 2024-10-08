@@ -17,7 +17,7 @@ void Calculator::createUI(HWND hwnd) {
 		
 	hwndText = CreateWindowEx(0,"Edit","",WS_CHILD | WS_VISIBLE | WS_BORDER | ES_READONLY | WS_DISABLED | ES_RIGHT, 10, 10, 210, 40, hwnd, (HMENU)1, NULL, NULL);
 	
-//	SendMessage(hwndText, WM_SETFONT,(WPARAM)hFont,0);
+	SendMessage(hwndText, WM_SETFONT,(WPARAM)hFont,0);
 	
 	hwndButtonAc = CreateWindowEx(0,"BUTTON","AC",WS_CHILD | WS_VISIBLE, 10, 60, 40, 40, hwnd, (HMENU)2, NULL, NULL);
 	hwndButtonDel = CreateWindowEx(0,"BUTTON","Del",WS_CHILD | WS_VISIBLE, 60, 60, 40, 40, hwnd, (HMENU)3, NULL, NULL);
@@ -65,19 +65,26 @@ void Calculator::handleButtonClicked(HWND hwnd, int buttonId) {
 					break;
 				}
 				case 3: {
-					char text[256];
-					GetWindowText(hwndText, text, 256);
-					int len = strlen(text);
-					if (len > 0) {
-						text[len - 1];
-					}
-//					strcat(text, "");
-					SetWindowText(hwndText, text);
+					// Get the current text in the input field
+                	char text[256];
+                	GetWindowText(hwndText, text, 256);
+
+                	// Remove the last character from the text
+                	int len = strlen(text);
+                	if (len > 0) {
+                    	text[len - 1] = '\0';
+                	}
+
+                	// Set the updated text back to the input field
+                	SetWindowText(hwndText, text);
 					break;
 				}
 				case 4: {
 					char text[256];
 					GetWindowText(hwndText, text, 256);
+					if (strlen(text) == 0) {
+                		break;
+            		}
 					strcat(text, "+");
 					SetWindowText(hwndText, text);
 					break;
@@ -113,6 +120,9 @@ void Calculator::handleButtonClicked(HWND hwnd, int buttonId) {
 				case 9: {
 					char text[256];
 					GetWindowText(hwndText, text, 256);
+					if (strlen(text) == 0) {
+                		break;
+            		}
 					strcat(text, "*");
 					SetWindowText(hwndText, text);
 					break;
@@ -141,6 +151,9 @@ void Calculator::handleButtonClicked(HWND hwnd, int buttonId) {
 				case 13: {
 					char text[256];
 					GetWindowText(hwndText, text, 256);
+					if (strlen(text) == 0) {
+                		break;
+            		}
 					strcat(text, "/");
 					SetWindowText(hwndText, text);
 					break;
@@ -183,6 +196,9 @@ void Calculator::handleButtonClicked(HWND hwnd, int buttonId) {
 				case 19: {
 					char text[256];
 					GetWindowText(hwndText, text, 256);
+					if (strlen(text) == 0) {
+                		break;
+            		}
 					strcat(text, ".");
 					SetWindowText(hwndText, text);
 					break;
